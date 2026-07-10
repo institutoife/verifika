@@ -329,7 +329,7 @@ form[method="POST"] button:hover {
 </head>
 <body>
     <div class="container">
-        <h1>ITE SOLVE</h1>
+        <h1>IFE SOLVE</h1>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

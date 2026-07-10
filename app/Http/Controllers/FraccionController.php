@@ -41,7 +41,7 @@ class FraccionesController extends Controller
     // Obtener los parámetros de la solicitud
     $unaDificultad = $request->dificultad;
     $unDenominador = $request->denominador;
-    $imagenURL = public_path('images/logo.png'); // Cambia la barra invertida por la barra normal
+    $imagenURL = public_path('images/logo-ife-educabol-ofical-instituto-de-formacion-educabol.png');
     $html = '';
 
     $html .= '<body><div>';
@@ -88,7 +88,7 @@ class FraccionesController extends Controller
     $mpdf = new Mpdf();
     $mpdf->SetMargins(10, 50, 30);
     $mpdf->SetHeader($encabezado);
-    $mpdf->SetFooter('www.ite.com.bo| www.tools.ite.com.bo |David Flores');
+    $mpdf->SetFooter('www.ife.com.bo| www.tools.ife.com.bo |IFE Educabol');
     $mpdf->WriteHTML($html);
     
     // Devolver el PDF generado

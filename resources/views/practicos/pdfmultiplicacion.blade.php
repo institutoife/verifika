@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Multiplicaciones - Ejercicios Propuestos</title>
+    <title>Multiplicaciones - {{ ucfirst($tipo ?? 'ambos') }}</title>
     <style>
         @page { margin: 2cm; }
         :root {
@@ -19,8 +19,8 @@
         .hr-op { border: none; border-bottom: 2px solid #26baa5; height: 0; margin: 2px 0; }
         .pdf-membrete{
             width: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-light);
+            background: #375f7a;
+            color: #ffffff;
             border-radius: 1.2em 1.2em 0 0;
             margin: 0 0 6px 0;
             border-spacing: 0;
@@ -59,6 +59,9 @@
             color: #888;
             margin-left: 8px;
         }
+        .respuesta-resumen { color: #375f7a; font-size: 1.15em; font-weight: bold; padding: 8px 0; }
+        .espacio-respuesta { height: 28px; border-bottom: 1px solid #cfd8dc; }
+        .footer-pdf { margin-top: 12px; padding-top: 8px; border-top: 2px solid #375f7a; color: #546e7a; font-size: 10px; text-align: center; }
     </style>
 </head>
 <body>
@@ -66,15 +69,15 @@
     <table class="pdf-membrete">
       <tr>
         <td class="pdf-membrete__left">
-          <div class="pdf-membrete__title">Ejercicios Propuestos</div>
+          <div class="pdf-membrete__title">Multiplicaciones · {{ ucfirst($tipo ?? 'ambos') }}</div>
           <div class="pdf-membrete__info">
             Ningún niño fracasa por falta de capacidad,
-            &nbsp; | &nbsp; <span class="pdf-membrete__email"> Escríbeme:+59171324941</span>
+            &nbsp; | &nbsp; <span class="pdf-membrete__email"> IFE Educabol · +591 75553338</span>
           </div>
         </td>
                 <td class="pdf-membrete__right">
                     <div class="pdf-membrete__logo-wrap">
-                        <img class="pdf-membrete__logo" src="{{ public_path('images/logo.png') }}" alt="Logo" width="31" height="31">
+                        <img class="pdf-membrete__logo" src="{{ public_path('images/logo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}" alt="Logo de IFE Educabol" width="31" height="31">
                     </div>
                 </td>
       </tr>
@@ -127,21 +130,27 @@
                             @endforeach
                         </tr>
                         <tr><td colspan="{{ $maxLenA+1 }}"><hr class="hr-op"></td></tr>
-                        @foreach($parcialesA as $parcial)
-                        <tr>
-                            <td class="inciso-label"></td>
-                            @foreach(str_split(str_pad($parcial, $maxLenA, ' ', STR_PAD_LEFT)) as $dig)
-                                <td>{{ $dig }}</td>
+                        @if(($tipo ?? 'ambos') === 'propuestos')
+                            <tr><td colspan="{{ $maxLenA+1 }}" class="espacio-respuesta">&nbsp;</td></tr>
+                        @elseif(($tipo ?? 'ambos') === 'respuestas')
+                            <tr><td colspan="{{ $maxLenA+1 }}" class="respuesta-resumen">Resultado: {{ $ejA->respuesta }}</td></tr>
+                        @else
+                            @foreach($parcialesA as $parcial)
+                            <tr>
+                                <td class="inciso-label"></td>
+                                @foreach(str_split(str_pad($parcial, $maxLenA, ' ', STR_PAD_LEFT)) as $dig)
+                                    <td>{{ $dig }}</td>
+                                @endforeach
+                            </tr>
                             @endforeach
-                        </tr>
-                        @endforeach
-                        <tr><td colspan="{{ $maxLenA+1 }}"><hr class="hr-op"></td></tr>
-                        <tr>
-                            <td class="inciso-label">=</td>
-                            @foreach(str_split(str_pad($ejA->respuesta, $maxLenA, ' ', STR_PAD_LEFT)) as $dig)
-                                <td class="respuesta">{{ $dig }}</td>
-                            @endforeach
-                        </tr>
+                            <tr><td colspan="{{ $maxLenA+1 }}"><hr class="hr-op"></td></tr>
+                            <tr>
+                                <td class="inciso-label">=</td>
+                                @foreach(str_split(str_pad($ejA->respuesta, $maxLenA, ' ', STR_PAD_LEFT)) as $dig)
+                                    <td class="respuesta">{{ $dig }}</td>
+                                @endforeach
+                            </tr>
+                        @endif
                     </table>
                 @endif
                 </td>
@@ -174,21 +183,27 @@
                             @endforeach
                         </tr>
                         <tr><td colspan="{{ $maxLenB+1 }}"><hr class="hr-op"></td></tr>
-                        @foreach($parcialesB as $parcial)
-                        <tr>
-                            <td class="inciso-label"></td>
-                            @foreach(str_split(str_pad($parcial, $maxLenB, ' ', STR_PAD_LEFT)) as $dig)
-                                <td>{{ $dig }}</td>
+                        @if(($tipo ?? 'ambos') === 'propuestos')
+                            <tr><td colspan="{{ $maxLenB+1 }}" class="espacio-respuesta">&nbsp;</td></tr>
+                        @elseif(($tipo ?? 'ambos') === 'respuestas')
+                            <tr><td colspan="{{ $maxLenB+1 }}" class="respuesta-resumen">Resultado: {{ $ejB->respuesta }}</td></tr>
+                        @else
+                            @foreach($parcialesB as $parcial)
+                            <tr>
+                                <td class="inciso-label"></td>
+                                @foreach(str_split(str_pad($parcial, $maxLenB, ' ', STR_PAD_LEFT)) as $dig)
+                                    <td>{{ $dig }}</td>
+                                @endforeach
+                            </tr>
                             @endforeach
-                        </tr>
-                        @endforeach
-                        <tr><td colspan="{{ $maxLenB+1 }}"><hr class="hr-op"></td></tr>
-                        <tr>
-                            <td class="inciso-label">=</td>
-                            @foreach(str_split(str_pad($ejB->respuesta, $maxLenB, ' ', STR_PAD_LEFT)) as $dig)
-                                <td class="respuesta">{{ $dig }}</td>
-                            @endforeach
-                        </tr>
+                            <tr><td colspan="{{ $maxLenB+1 }}"><hr class="hr-op"></td></tr>
+                            <tr>
+                                <td class="inciso-label">=</td>
+                                @foreach(str_split(str_pad($ejB->respuesta, $maxLenB, ' ', STR_PAD_LEFT)) as $dig)
+                                    <td class="respuesta">{{ $dig }}</td>
+                                @endforeach
+                            </tr>
+                        @endif
                     </table>
                 @endif
                 </td>
@@ -198,6 +213,8 @@
         @php $ejercicioNum++; @endphp
     @endfor
 @endforeach
+
+<div class="footer-pdf">Verifika · IFE Educabol · WhatsApp +591 75553338 · ife.com.bo</div>
 
 </body>
 </html>

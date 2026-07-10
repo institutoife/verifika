@@ -41,7 +41,7 @@ class RegisteredUserController extends Controller
             'phone.unique' => 'Este número de teléfono ya está registrado.',
         ]);
 
-        $email = $request->phone . '@verifika.ite.com.bo';
+        $email = $request->phone . '@verifika.ife.com.bo';
 
         $user = User::create([
             'name' => $request->name,

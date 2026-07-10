@@ -35,7 +35,7 @@ class SumaController extends Controller
         $UnaDificultad=$request->dificultad;
         $UnosSumandos=$request->sumandos;
         $UnosDigitos=$request->digitos;
-        $imagenURL = public_path('images\logo.png');
+        $imagenURL = public_path('images/logo-ife-educabol-ofical-instituto-de-formacion-educabol.png');
         $html = '';
         $html.='<body><div>';
         $html .= '<link rel="stylesheet" href="' . public_path('css/estilosite.css') . '">';
@@ -68,7 +68,7 @@ class SumaController extends Controller
             $mpdf = new \Mpdf\Mpdf();
             $mpdf->SetMargins(10, 50, 30);
             $mpdf->SetHeader($encabezado);
-            $mpdf->SetFooter('www.ite.com.bo| www.propuestos.ite.com.bo |David Flores');
+            $mpdf->SetFooter('www.ife.com.bo| www.propuestos.ife.com.bo |IFE Educabol');
             $mpdf->WriteHTML($html);
             return $mpdf->output();
 

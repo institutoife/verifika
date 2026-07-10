@@ -1,39 +1,73 @@
+@section('title', 'Iniciar sesión | Verifika')
 
-@section('title', 'Verifika - Iniciar sesión')
 <x-guest-layout>
-    <div class="flex flex-col items-center justify-center min-h-[60vh] px-2">
-        <div class="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 dark:border-gray-800">
-            <h1 class="text-2xl font-bold text-center mb-6 text-corp dark:text-corp tracking-tight">Iniciar sesión</h1>
-            <x-auth-session-status class="mb-4" :status="session('status')" />
-            <form method="POST" action="{{ route('login') }}" class="space-y-6">
-                @csrf
-                <div class="px-2 sm:px-4">
-                    <x-input-label for="phone" :value="__('Número de teléfono')" class="font-semibold text-corp" />
-                    <x-text-input id="phone" class="block mt-1 w-full rounded-lg border-gray-300 dark:border-gray-700 focus:border-corp focus:ring-corp bg-gray-50 dark:bg-gray-800" type="tel" name="phone" :value="old('phone')" required autofocus autocomplete="tel" placeholder="Ej: 71234567" />
-                    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                </div>
-                <div class="px-2 sm:px-4">
-                    <x-input-label for="password" :value="__('Contraseña')" class="font-semibold text-corp" />
-                    <x-text-input id="password" class="block mt-1 w-full rounded-lg border-gray-300 dark:border-gray-700 focus:border-corp focus:ring-corp bg-gray-50 dark:bg-gray-800" type="password" name="password" required autocomplete="current-password" />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
-                <div class="flex items-center justify-between px-2 sm:px-4">
-                    <label for="remember_me" class="flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded border-gray-300 dark:border-gray-700 text-corp shadow-sm focus:ring-corp" name="remember">
-                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-300">{{ __('Recordarme') }}</span>
-                    </label>
-                    @if (Route::has('password.request'))
-                        <a class="text-sm text-corp hover:underline font-medium" href="{{ route('password.request') }}">
-                            {{ __('¿Olvidaste tu contraseña?') }}
-                        </a>
-                    @endif
-                </div>
-                <div class="px-2 sm:px-4">
-                    <x-primary-button class="w-full py-3 rounded-lg text-base font-bold bg-corp hover:bg-corp-dark transition-colors flex items-center justify-center">
-                        {{ __('Ingresar') }}
-                    </x-primary-button>
-                </div>
-            </form>
+    <header class="auth-heading">
+        <span class="auth-eyebrow">Bienvenido de nuevo</span>
+        <h1>Iniciar sesión</h1>
+        <p>Ingresa con tu número de teléfono para continuar.</p>
+    </header>
+
+    <x-auth-session-status class="auth-status" :status="session('status')" />
+
+    <form method="POST" action="{{ route('login') }}" class="auth-form">
+        @csrf
+
+        <div class="auth-field">
+            <x-input-label for="phone" :value="__('Número de teléfono')" class="auth-label" />
+            <div class="input-shell">
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                <x-text-input
+                    id="phone"
+                    class="auth-input"
+                    type="tel"
+                    name="phone"
+                    :value="old('phone')"
+                    required
+                    autofocus
+                    autocomplete="tel"
+                    inputmode="tel"
+                    placeholder="Ej.: 71234567"
+                />
+            </div>
+            <x-input-error :messages="$errors->get('phone')" />
         </div>
-    </div>
+
+        <div class="auth-field">
+            <x-input-label for="password" :value="__('Contraseña')" class="auth-label" />
+            <div class="input-shell">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                <x-text-input
+                    id="password"
+                    class="auth-input"
+                    type="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                    placeholder="Ingresa tu contraseña"
+                />
+            </div>
+            <x-input-error :messages="$errors->get('password')" />
+        </div>
+
+        <div class="auth-options">
+            <label class="remember-label" for="remember_me">
+                <input id="remember_me" type="checkbox" name="remember">
+                <span>Recordarme</span>
+            </label>
+
+            @if (Route::has('password.request'))
+                <a class="auth-text-link" href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+            @endif
+        </div>
+
+        <button class="auth-submit" type="submit">
+            Ingresar
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </button>
+    </form>
+
+    <p class="auth-switch">
+        ¿Aún no tienes una cuenta?
+        <a href="{{ route('register') }}">Regístrate aquí</a>.
+    </p>
 </x-guest-layout>

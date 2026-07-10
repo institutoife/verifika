@@ -76,12 +76,12 @@
                     <div class="pdf-membrete__title">Ejercicios Propuestos</div>
                     <div class="pdf-membrete__info">
                         Ningún niño fracasa por falta de capacidad,
-                        &nbsp; | &nbsp; <span class="pdf-membrete__email"> Escríbeme:+59171324941</span>
+                        &nbsp; | &nbsp; <span class="pdf-membrete__email"> IFE Educabol · +591 75553338</span>
                     </div>
                 </td>
                 <td class="pdf-membrete__right">
                     <div class="pdf-membrete__logo-wrap">
-                        <img class="pdf-membrete__logo" src="{{ public_path('images/logo.png') }}" alt="Logo">
+                        <img class="pdf-membrete__logo" src="{{ public_path('images/logo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}" alt="Logo de IFE Educabol">
                     </div>
                 </td>
             </tr>
@@ -311,13 +311,7 @@
         <div class="footer-bar-secondary"></div>
     </div>
     <div class="footer-content">
-        <strong>Clases :</strong> +59171324941 &nbsp; | &nbsp;
-        <strong>Otros servicios:</strong> +59175553338 &nbsp; | &nbsp;
-        <strong>Facebook:</strong> <a href="https://facebook.com/ite_educabol" target="_blank">/ite_educabol</a> &nbsp; | &nbsp;
-        <strong>Instagram:</strong> <a href="https://instagram.com/ite_educabol" target="_blank">@ite_educabol</a> &nbsp; | &nbsp;
-        <strong>YouTube:</strong> <a href="https://youtube.com/@@ite_educabol" target="_blank">@ite_educabol</a> &nbsp; | &nbsp;
-        <strong>TikTok:</strong> <a href="https://tiktok.com/@ite_educabol" target="_blank">@ite_educabol</a> &nbsp; | &nbsp;
-        <strong>Web:</strong> <a href="https://ite.com.bo" target="_blank">ite.com.bo</a>
+        Verifika · IFE Educabol · WhatsApp +591 75553338 · @ife_educabol · ife.com.bo
     </div>
 </body>
 </html>

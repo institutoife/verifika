@@ -91,7 +91,7 @@
         <div class="container align-items-center d-flex">
             <a class="navbar-brand d-flex align-items-center gap-2" href="/">
                 <span class="logo-circle position-relative logo-pulse" style="display:inline-block;width:48px;height:48px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(38,186,165,.10);overflow:hidden;vertical-align:middle;">
-                    <img src="/images/logo.png" alt="Logo ITE" style="width:38px;height:38px;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+                    <img src="{{ asset('images/isologo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}" alt="Isologo de IFE Educabol" style="width:38px;height:38px;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
                 </span>
                 <span style="font-weight:900;letter-spacing:.5px;">Verifika</span>
             </a>
@@ -181,7 +181,7 @@
                         </div>
                         <div class="modal-body text-center">
                             <span class="logo-circle position-relative logo-pulse" style="display:inline-block;width:68px;height:68px;background:#fff;border-radius:50%;box-shadow:0 2px 12px rgba(38,186,165,.10);overflow:hidden;vertical-align:middle;margin-bottom:1rem;">
-                                <img src="/images/logo.png" alt="Logo ITE" style="width:54px;height:54px;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+                                <img src="{{ asset('images/isologo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}" alt="Isologo de IFE Educabol" style="width:54px;height:54px;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
                             </span>
                             <p class="mb-0" style="color:var(--secondary-color);font-size:1.1rem;">Esta herramienta estará disponible muy pronto.<br>¡Gracias por tu interés!</p>
                         </div>

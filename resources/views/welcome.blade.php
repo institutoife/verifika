@@ -1,7 +1,15 @@
 {{-- resources/views/welcome.blade.php --}}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-BO">
 <head>
+    @php
+        $siteName = $projectName ?? 'Verifika';
+        $seoTitle = $siteName . ' | Ejercicios de matemáticas y material educativo de IFE Educabol';
+        $seoDescription = 'Genera ejercicios de matemáticas personalizados, soluciones paso a paso y material educativo en PDF para primaria y secundaria con IFE Educabol.';
+        $canonicalUrl = url()->current();
+        $seoImage = asset('images/logo-ife-educabol-ofical-instituto-de-formacion-educabol.png');
+        $isologo = asset('images/isologo-ife-educabol-ofical-instituto-de-formacion-educabol.png');
+    @endphp
         <!-- Fuentes corporativas -->
         <style>
             @font-face {
@@ -32,7 +40,76 @@
         </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $projectName ?? 'Verifika' }} - {{ $projectPhrase ?? 'Ejercicios a medida, respuestas paso a paso y material listo para imprimir.' }}</title>
+    <title>{{ $seoTitle }}</title>
+    <meta name="description" content="{{ $seoDescription }}">
+    <meta name="keywords" content="IFE Educabol, Instituto de Formación Educabol, ejercicios de matemáticas, matemáticas primaria, matemáticas secundaria, material educativo PDF, ejercicios paso a paso, apoyo escolar Bolivia, educación tecnológica">
+    <meta name="author" content="IFE Educabol - Instituto de Formación Educabol">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="theme-color" content="#26baa5">
+    <link rel="canonical" href="{{ $canonicalUrl }}">
+    <link rel="icon" type="image/png" href="{{ $isologo }}">
+    <link rel="apple-touch-icon" href="{{ $isologo }}">
+
+    <meta property="og:locale" content="es_BO">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="IFE Educabol">
+    <meta property="og:title" content="{{ $seoTitle }}">
+    <meta property="og:description" content="{{ $seoDescription }}">
+    <meta property="og:url" content="{{ $canonicalUrl }}">
+    <meta property="og:image" content="{{ $seoImage }}">
+    <meta property="og:image:alt" content="Logo de IFE Educabol, Instituto de Formación Educabol">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $seoTitle }}">
+    <meta name="twitter:description" content="{{ $seoDescription }}">
+    <meta name="twitter:image" content="{{ $seoImage }}">
+    <meta name="twitter:image:alt" content="Logo de IFE Educabol, Instituto de Formación Educabol">
+
+    <script type="application/ld+json">
+        {!! json_encode([
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'EducationalOrganization',
+                    '@id' => url('/#organization'),
+                    'name' => 'IFE Educabol',
+                    'alternateName' => 'Instituto de Formación Educabol',
+                    'url' => url('/'),
+                    'logo' => $seoImage,
+                    'image' => $seoImage,
+                    'description' => 'Instituto de formación y apoyo escolar en matemáticas, programación, robótica, computación, diseño gráfico e inteligencia artificial.',
+                    'areaServed' => ['@type' => 'Country', 'name' => 'Bolivia'],
+                    'contactPoint' => [
+                        '@type' => 'ContactPoint',
+                        'telephone' => '+59171324941',
+                        'contactType' => 'customer service',
+                        'availableLanguage' => 'Spanish',
+                    ],
+                ],
+                [
+                    '@type' => 'WebSite',
+                    '@id' => url('/#website'),
+                    'url' => url('/'),
+                    'name' => $siteName,
+                    'description' => $seoDescription,
+                    'inLanguage' => 'es-BO',
+                    'publisher' => ['@id' => url('/#organization')],
+                ],
+                [
+                    '@type' => 'WebApplication',
+                    '@id' => url('/#webapp'),
+                    'name' => $siteName,
+                    'url' => url('/'),
+                    'applicationCategory' => 'EducationalApplication',
+                    'operatingSystem' => 'Web',
+                    'inLanguage' => 'es-BO',
+                    'description' => $seoDescription,
+                    'publisher' => ['@id' => url('/#organization')],
+                ],
+            ],
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
 
     {{-- Bootstrap --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -332,7 +409,7 @@
     <div class="container py-2">
         <a class="brand" href="#home" aria-label="Ir al inicio">
             <span style="display:grid;place-items:center;padding:0;">
-                <img src="/images/logo.png" alt="Logo ITE" style="width:38px;height:38px;border-radius:12px;object-fit:contain;background:none;box-shadow:none;">
+                <img src="{{ asset('images/isologo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}" alt="Isologo de IFE Educabol" width="38" height="38" style="width:38px;height:38px;border-radius:12px;object-fit:contain;background:none;box-shadow:none;">
             </span>
             <span>{{ $projectName ?? 'Verifika' }}</span>
         </a>
@@ -346,7 +423,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-2">
                 <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
                 <li class="nav-item"><a class="nav-link" href="#herramientas">Herramientas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#ite">ITE</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ife">IFE</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
 
                 <li class="nav-item ms-lg-2">
@@ -534,12 +611,12 @@
     </div>
 </section>
 
-<section id="ite" class="section">
+<section id="ife" class="section">
     <div class="container">
         <div class="text-center mb-4">
-            <h2 class="section-title">¿Qué es ITE?</h2>
+            <h2 class="section-title">¿Qué es IFE?</h2>
             <p class="section-sub mt-2">
-                En ITE impulsamos el aprendizaje con cursos de apoyo escolar, programación, robótica, computación, diseño gráfico e inteligencia artificial. Nuestro objetivo es acercar la tecnología y el conocimiento a estudiantes de todas las edades, de forma práctica y creativa.
+                En IFE Educabol, el Instituto de Formación Educabol, impulsamos el aprendizaje con cursos de apoyo escolar, programación, robótica, computación, diseño gráfico e inteligencia artificial. Nuestro objetivo es acercar la tecnología y el conocimiento a estudiantes de todas las edades, de forma práctica y creativa.
             </p>
         </div>
 
@@ -642,7 +719,7 @@
 <footer class="py-4">
     <div class="container text-center">
         <div class="small text-muted">
-            © {{ date('Y') }} {{ $projectName ?? 'Verifika' }} · Hecho con 💚 en ITE
+            © {{ date('Y') }} {{ $projectName ?? 'Verifika' }} · Hecho con 💚 en IFE Educabol
         </div>
     </div>
 </footer>

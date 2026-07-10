@@ -2,14 +2,23 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Divisiones - Ejercicios Propuestos</title>
+    <title>Divisiones - {{ ucfirst($tipo ?? 'propuestos') }}</title>
     <style>
         @page { margin: 2cm; }
         :root {
             --primary-color: rgb(38,186,165);
             --secondary-color: rgb(55,95,122);
             --text-light: #fff;
-                            /* Lógica blade eliminada: no debe haber uso de $ejB en el CSS */
+        }
+        body { margin: 0; color: #263238; font-family: Arial, sans-serif; }
+        .pdf-membrete {
+            width: 100%;
+            margin: 0 0 12px;
+            border-collapse: collapse;
+            color: #ffffff;
+            background: #375f7a;
+        }
+        .pdf-membrete__left {
             vertical-align: top;
             padding: 8px 10px;
         }
@@ -47,6 +56,7 @@
             width: auto;
             max-width: 80px;
         }
+        .footer-pdf { margin-top: 12px; padding-top: 8px; border-top: 2px solid #375f7a; color: #546e7a; font-size: 10px; text-align: center; }
         .ej-titulo {
             font-size: 1.1em;
             font-weight: bold;
@@ -77,14 +87,14 @@
     <table class="pdf-membrete">
       <tr>
         <td class="pdf-membrete__left">
-          <div class="pdf-membrete__title">Ejercicios Propuestos</div>
+          <div class="pdf-membrete__title">Divisiones · {{ ucfirst($tipo ?? 'propuestos') }}</div>
           <div class="pdf-membrete__info">
             Ningún niño fracasa por falta de capacidad,
-            &nbsp; | &nbsp; <span class="pdf-membrete__email"> Escríbeme:+59171324941</span>
+            &nbsp; | &nbsp; <span class="pdf-membrete__email"> IFE Educabol · +591 75553338</span>
           </div>
         </td>
         <td class="pdf-membrete__right">
-          <img class="pdf-membrete__logo" src="{{ public_path('images/logo.png') }}" alt="Logo">
+          <img class="pdf-membrete__logo" src="{{ public_path('images/logo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}" alt="Logo de IFE Educabol">
         </td>
       </tr>
     </table>
@@ -193,6 +203,8 @@
     <hr style="border: none; border-top: 2px solid #888; margin: 18px 0 0 0;">
     @php $ejercicioNum++; @endphp
 @endfor
+
+<div class="footer-pdf">Verifika · IFE Educabol · WhatsApp +591 75553338 · ife.com.bo</div>
 
 </body>
 </html>

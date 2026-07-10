@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $email = '71039910@verifika.ite.com.bo';
+        $email = '71039910@verifika.ife.com.bo';
         $phone = '71039910';
 
         $data = [

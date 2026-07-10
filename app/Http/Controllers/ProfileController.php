@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $user->name = $data['name'];
         $user->phone = $data['phone'];
         // Actualizar el email para login basado en el teléfono
-        $user->email = $data['phone'] . '@verifika.ite.com.bo';
+        $user->email = $data['phone'] . '@verifika.ife.com.bo';
         if (!empty($data['password'])) {
             $user->password = bcrypt($data['password']);
         }

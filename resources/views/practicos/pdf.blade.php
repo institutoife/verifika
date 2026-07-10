@@ -20,8 +20,8 @@
         .membrete {
             width: 100%;
             margin: 0 0 8px 0;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-light);
+            background: linear-gradient(90deg, #26baa5, #375f7a);
+            color: #ffffff;
             padding: 10px 12px;
             box-sizing: border-box;
         }
@@ -78,7 +78,7 @@
         .membrete-redes .svg-tiktok { color: #010101; }
 
         h2 {
-            color: var(--primary-color);
+            color: #26baa5;
             margin: 6px 0 10px 0;
             font-size: 16px;
         }
@@ -123,7 +123,7 @@
         }
 
         .respuesta {
-            color: var(--secondary-color);
+            color: #375f7a;
             font-weight: bold;
             font-size: 20px;
             text-align: center;
@@ -138,8 +138,8 @@
             width: 100%;
             margin-top: 14px;
             padding: 10px 8px;
-            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-            color: var(--text-light);
+            background: linear-gradient(90deg, #375f7a, #26baa5);
+            color: #ffffff;
             text-align: center;
             font-size: 12px;
             box-sizing: border-box;
@@ -147,18 +147,15 @@
 
         /* CSS SOLO del membrete (clases nuevas) */
         .pdf-membrete{
-        width: 100%;
-        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        color: var(--text-light);
-        /* Ajustes para círculo blanco detrás del logo */
-        .pdf-membrete__right{ width: 66px; text-align: right; vertical-align: top; }
-        .pdf-membrete__logo-wrap{ display: inline-block; background:#eef9ff; border:1px solid #cfe8f2; border-radius:50%; width:44px; height:44px; padding:4px; box-sizing:border-box; overflow:hidden; }
-        .pdf-membrete__logo{ display:block; margin:0 auto; padding:0; border:0; vertical-align:middle; width:31px; height:31px; }
-        border-radius: 1.2em 1.2em 0 0;
-        margin: 0 0 6px 0;
-        border-spacing: 0;
-        border-collapse: collapse;
+            width: 100%;
+            background: #375f7a;
+            color: #ffffff;
+            margin: 0 0 6px 0;
+            border-spacing: 0;
+            border-collapse: collapse;
         }
+
+        .pdf-membrete__logo-wrap{ display: inline-block; background:#eef9ff; border:1px solid #cfe8f2; border-radius:50%; width:44px; height:44px; padding:4px; box-sizing:border-box; overflow:hidden; }
 
         .pdf-membrete__row{ }
 
@@ -221,11 +218,11 @@
 
     <!-- Texto a la izquierda -->
     <td class="pdf-membrete__left">
-      <div class="pdf-membrete__title">Ejercicios Propuestos</div>
+      <div class="pdf-membrete__title">{{ ucfirst($practico->ejercicios->first()->tipo ?? 'Ejercicios') }} · {{ ucfirst($tipo ?? 'propuestos') }}</div>
 
       <div class="pdf-membrete__info">
         Ningún niño fracasa por falta de capacidad, 
-        &nbsp; | &nbsp; <span class="pdf-membrete__email"> Escríbeme:+59171324941</span>
+        &nbsp; | &nbsp; <span class="pdf-membrete__email"> IFE Educabol · +591 75553338</span>
       </div>
     </td>
 
@@ -234,7 +231,7 @@
             <div class="pdf-membrete__logo-wrap">
                 <img
                     class="pdf-membrete__logo"
-                    src="{{ public_path('images/logo.png') }}"
+                    src="{{ public_path('images/logo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}"
                     alt="Logo"
                     width="31"
                     height="31"
@@ -419,32 +416,7 @@
     @endfor
 
     <div class="footer-pdf">
-        <div>
-            <strong>Clases :</strong> +59171324941 &nbsp; | &nbsp;
-            <strong>Otros servicios:</strong> +59175553338 &nbsp; | &nbsp;
-            <strong>Facebook:</strong> <a href="https://facebook.com/ite_educabol" target="_blank">/ite_educabol</a> &nbsp; | &nbsp;
-            <strong>Instagram:</strong> <a href="https://instagram.com/ite_educabol" target="_blank">@ite_educabol</a> &nbsp; | &nbsp;
-            <strong>YouTube:</strong> <a href="https://youtube.com/@@ite_educabol" target="_blank">@ite_educabol</a> &nbsp; | &nbsp;
-            <strong>TikTok:</strong> <a href="https://tiktok.com/@ite_educabol" target="_blank">@ite_educabol</a> &nbsp; | &nbsp;
-            <strong>Web:</strong> <a href="https://ite.com.bo" target="_blank">ite.com.bo</a>
-        </div>
-        <div style="margin-top:4px;">
-            <a href="https://facebook.com/ite_educabol" target="_blank" title="Facebook">
-                <svg class="svg-facebook" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="width:16px;height:16px;"><path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91V127.91c0-25.35 12.42-50.06 52.24-50.06H293V6.26S259.5 0 225.36 0c-73.22 0-121 44.38-121 124.72v70.62H22.89V288h81.47v224h100.2V288z"/></svg>
-            </a>
-            <a href="https://instagram.com/ite_educabol" target="_blank" title="Instagram">
-                <svg class="svg-instagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width:16px;height:16px;"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 186c-39.5 0-71.5-32-71.5-71.5s32-71.5 71.5-71.5 71.5 32 71.5 71.5-32 71.5-71.5 71.5zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-92.1S388.6 7.7 353.3 6C317.7 4.3 256.3 0 224 0s-93.7 4.3-129.3 6C59.4 7.7 28 15.9 2.7 41.2S7.7 59.4 6 94.7C4.3 130.3 0 191.7 0 224s4.3 93.7 6 129.3c1.7 35.3 9.9 66.7 36.2 92.1s56.8 34.5 92.1 36.2C130.3 507.7 191.7 512 224 512s93.7-4.3 129.3-6c35.3-1.7 66.7-9.9 92.1-36.2s34.5-56.8 36.2-92.1c1.7-35.6 6-97 6-129.3s-4.3-93.7-6-129.3z"/></svg>
-            </a>
-            <a href="https://youtube.com/@@ite_educabol" target="_blank" title="YouTube">
-                <svg class="svg-youtube" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="width:16px;height:16px;"><path fill="currentColor" d="M549.655 124.083c-6.281-23.725-24.958-42.401-48.684-48.684C458.281 64 288 64 288 64s-170.281 0-212.971 11.399c-23.726 6.283-42.403 24.959-48.684 48.684C16 166.773 16 256 16 256s0 89.227 10.345 131.917c6.281 23.725 24.958 42.401 48.684 48.684C117.719 448 288 448 288 448s170.281 0 212.971-11.399c23.726-6.283 42.403-24.959 48.684-48.684C560 345.227 560 256 560 256s0-89.227-10.345-131.917zM232 336V176l142.857 80L232 336z"/></svg>
-            </a>
-            <a href="https://tiktok.com/@ite_educabol" target="_blank" title="TikTok">
-                <svg class="svg-tiktok" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width:16px;height:16px;"><path fill="currentColor" d="M448,209.9v125.1c0,97.2-78.8,176-176,176S96,432.2,96,335z"/></svg>
-            </a>
-            <a href="https://ite.com.bo" target="_blank" title="Página Web">
-                <svg class="svg-web" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" style="width:16px;height:16px;"><path fill="currentColor" d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 48c110.5 0 200 89.5 200 200 0 110.5-89.5 200-200 200C137.5 456 48 366.5 48 256 48 145.5 137.5 56 248 56zm0 40c-88.2 0-160 71.8-160 160 0 88.2 71.8 160 160 160 88.2 0 160-71.8 160-160 0-88.2-71.8-160-160-160zm0 32c70.7 0 128 57.3 128 128s-57.3 128-128 128-128-57.3-128-128 57.3-128 128-128z"/></svg>
-            </a>
-        </div>
+        Verifika · IFE Educabol · WhatsApp +591 75553338 · @ife_educabol · ife.com.bo
     </div>
 
 </body>

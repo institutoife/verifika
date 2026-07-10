@@ -10,7 +10,7 @@
                 <div class="card-header text-white text-center p-4" style="background: linear-gradient(115deg, rgb(38,186,165), rgb(55,95,122)); border-top-left-radius:1rem; border-top-right-radius:1rem;">
                     <div class="mb-2">
                         <span class="logo-circle position-relative logo-pulse" style="display:inline-block;width:54px;height:54px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(38,186,165,.10);overflow:hidden;vertical-align:middle;">
-                            <img src="/images/logo.png" alt="Logo ITE" style="width:44px;height:44px;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+                            <img src="{{ asset('images/isologo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}" alt="Isologo de IFE Educabol" style="width:44px;height:44px;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
                         </span>
                     </div>
                     <h4 class="mb-0" style="font-weight:900;letter-spacing:1px;">Mi Perfil</h4>

@@ -41,7 +41,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $email = $this->input('phone') . '@verifika.ite.com.bo';
+        $email = $this->input('phone') . '@verifika.ife.com.bo';
         $credentials = [
             'email' => $email,
             'password' => $this->input('password'),

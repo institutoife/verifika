@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <span class="logo-circle position-relative logo-pulse" style="display:inline-block;width:38px;height:38px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(38,186,165,.10);overflow:hidden;vertical-align:middle;">
-                            <img src="/images/logo.png" alt="Logo ITE" style="width:28px;height:28px;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+                            <img src="{{ asset('images/isologo-ife-educabol-ofical-instituto-de-formacion-educabol.png') }}" alt="Isologo de IFE Educabol" style="width:28px;height:28px;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
                         </span>
                     </a>
                 </div>

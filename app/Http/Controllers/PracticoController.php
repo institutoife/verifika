@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Models\Practico;
 
 use Mpdf\Mpdf;
+use Mpdf\Output\Destination;
 use App\Services\DivisionLatinoamericana;
 
 class PracticoController extends Controller
@@ -46,35 +48,45 @@ class PracticoController extends Controller
     public function imprimir($id, $tipo = 'propuestos')
     {
         $practico = Practico::with('ejercicios.operandos')->findOrFail($id);
-        if ($tipo === 'division' || $tipo === 'propuestos' || $tipo === 'respuestas') {
-            $html = view('practicos.divisionpdf', compact('practico', 'tipo'))->render();
-            $mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
-            $mpdf->WriteHTML($html);
-            $filename = 'division_' . $practico->id . '_' . $tipo . '.pdf';
-            return response($mpdf->Output($filename, 'S'), 200, [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="' . $filename . '"'
-            ]);
+
+        $primerEjercicio = $practico->ejercicios->first();
+        abort_if(!$primerEjercicio, 404, 'El práctico no contiene ejercicios para imprimir.');
+
+        $operacion = $primerEjercicio->tipo;
+        $variante = match ($tipo) {
+            'multiplicacion' => 'ambos',
+            'division' => 'propuestos',
+            default => $tipo,
+        };
+
+        abort_unless(in_array($variante, ['propuestos', 'respuestas', 'ambos'], true), 404);
+
+        if ($operacion === 'division') {
+            return $this->pdfResponse(
+                'practicos.divisionpdf',
+                compact('practico') + ['tipo' => $variante],
+                "division_{$practico->id}_{$variante}.pdf",
+                'Divisiones - ' . ucfirst($variante),
+            );
         }
-        if ($tipo === 'multiplicacion') {
+
+        if ($operacion === 'multiplicacion') {
             $practicos = collect([$practico]);
-            $html = view('practicos.pdfmultiplicacion', compact('practicos'))->render();
-            $mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
-            $mpdf->WriteHTML($html);
-            $filename = 'multiplicaciones_' . $practico->id . '.pdf';
-            return response($mpdf->Output($filename, 'S'), 200, [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="' . $filename . '"'
-            ]);
+
+            return $this->pdfResponse(
+                'practicos.pdfmultiplicacion',
+                compact('practicos') + ['tipo' => $variante],
+                "multiplicaciones_{$practico->id}_{$variante}.pdf",
+                'Multiplicaciones - ' . ucfirst($variante),
+            );
         }
-        $html = view('practicos.pdf', compact('practico', 'tipo'))->render();
-        $mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
-        $mpdf->WriteHTML($html);
-        $filename = 'practico_' . $practico->id . '_' . $tipo . '.pdf';
-        return response($mpdf->Output($filename, 'S'), 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . $filename . '"'
-        ]);
+
+        return $this->pdfResponse(
+            'practicos.pdf',
+            compact('practico') + ['tipo' => $variante],
+            "practico_{$practico->id}_{$operacion}_{$variante}.pdf",
+            ucfirst($operacion) . ' - ' . ucfirst($variante),
+        );
     }
      /**
      * Genera el PDF de división con desarrollo paso a paso (formato latinoamericano).
@@ -100,19 +112,12 @@ class PracticoController extends Controller
         if (request()->has('debug')) {
             return response()->json($pasosEjercicios);
         }
-        try {
-            $html = view('practicos.divisionprocedimiento', compact('practico', 'pasosEjercicios'))->render();
-            $mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A4']);
-            $mpdf->WriteHTML($html);
-            $filename = 'division_procedimiento_' . $practico->id . '.pdf';
-            return response($mpdf->Output($filename, 'S'), 200, [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="' . $filename . '"'
-            ]);
-        } catch (\Throwable $e) {
-            return response("ERROR: " . $e->getMessage() . "\n\n" . $e->getTraceAsString(), 500)
-                ->header('Content-Type', 'text/plain');
-        }
+        return $this->pdfResponse(
+            'practicos.divisionprocedimiento',
+            compact('practico', 'pasosEjercicios'),
+            'division_procedimiento_' . $practico->id . '.pdf',
+            'División con procedimiento',
+        );
     }
     
     public function destroy($id)
@@ -120,5 +125,38 @@ class PracticoController extends Controller
         $practico = Practico::findOrFail($id);
         $practico->delete();
         return redirect()->route('practicos.index')->with('success', 'Práctico eliminado correctamente.');
+    }
+
+    private function pdfResponse(string $view, array $data, string $filename, string $title)
+    {
+        try {
+            $tempDir = storage_path('app/mpdf');
+            File::ensureDirectoryExists($tempDir);
+
+            $html = view($view, $data)->render();
+            $mpdf = new Mpdf([
+                'mode' => 'utf-8',
+                'format' => 'A4',
+                'tempDir' => $tempDir,
+                'margin_left' => 16,
+                'margin_right' => 16,
+                'margin_top' => 16,
+                'margin_bottom' => 16,
+            ]);
+            $mpdf->SetTitle($title . ' | Verifika');
+            $mpdf->SetAuthor('IFE Educabol');
+            $mpdf->SetCreator('Verifika');
+            $mpdf->WriteHTML($html);
+
+            return response($mpdf->Output('', Destination::STRING_RETURN), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . $filename . '"',
+                'Cache-Control' => 'private, no-store, max-age=0',
+                'X-Content-Type-Options' => 'nosniff',
+            ]);
+        } catch (\Throwable $exception) {
+            report($exception);
+            abort(500, 'No se pudo generar el PDF. Inténtalo nuevamente.');
+        }
     }
 }
