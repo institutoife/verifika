@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('is_admin')->default(false)->after('password');
         });
-    }
+    } 
 
     public function down(): void
     {
